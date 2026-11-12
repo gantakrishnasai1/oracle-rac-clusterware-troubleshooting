@@ -1,113 +1,109 @@
-# Oracle RAC & Clusterware Troubleshooting
 
-A practical knowledge base for Oracle Database Administrators working
-with Oracle RAC, Grid Infrastructure, Clusterware, and database
-performance troubleshooting.
+# Oracle RAC Administration & Troubleshooting Knowledge Base
 
-This repository documents diagnostic approaches, useful commands,
-checklists, and lessons learned from Oracle RAC administration. The goal
-is to make troubleshooting workflows easier to follow, repeat, and
-validate.
+A practical knowledge base for Oracle Database Administrators covering Oracle Real Application Clusters (RAC), Grid Infrastructure, Clusterware, performance troubleshooting, health checks, and automation.
 
-## Repository Scope
+This repository contains DBA-focused troubleshooting guides, operational checklists, and shell scripts designed to help diagnose issues, perform routine health checks, and support Oracle RAC environments.
 
-### 1. Oracle RAC and Grid Infrastructure
+## Contents
 
--   Clusterware and CRS troubleshooting
--   Cluster resource status and management
--   Node reachability and name-resolution checks
--   Inter-node connectivity and SSH validation
--   Grid Infrastructure installation pre-checks
--   Common `runcluvfy` validation failures
+- [Clusterware Troubleshooting](#clusterware-troubleshooting)
+- [Grid Infrastructure](#grid-infrastructure)
+- [RAC Performance](#rac-performance)
+- [Automation Scripts](#automation-scripts)
+- [Operational Checklists](#operational-checklists)
+- [Getting Started](#getting-started)
+- [Compatibility and Safety](#compatibility-and-safety)
+- [Contributing](#contributing)
 
-### 2. RAC Performance Analysis
+## Clusterware Troubleshooting
 
--   Oracle AWR and ADDM report review
--   Instance workload distribution
--   Database CPU and wait-event analysis
--   RAC global cache and interconnect investigation
--   SQL performance and execution-plan review
--   Logical I/O and physical I/O investigation
+Guides for investigating Oracle Clusterware and RAC connectivity issues.
 
-### 3. Database Administration Diagnostics
+| Guide | Description |
+|---|---|
+| [Node Reachability Checks](clusterware/node-reachability-checks.md) | Troubleshoot hostname resolution, node connectivity, SSH, network interfaces, and routing. |
+| [OCR and Voting Disk Checks](clusterware/ocr-voting-disk-checks.md) | Check OCR health, OCR backups, voting disks, and related Clusterware issues. |
 
--   Practical SQL and command-line checks
--   Health-check and validation procedures
--   Evidence collection for incident investigation
--   Pre-change and post-change validation checklists
+## Grid Infrastructure
 
-## Suggested Repository Structure
+Guides for Grid Infrastructure verification and troubleshooting.
 
-``` text
-oracle-rac-clusterware-troubleshooting/
-├── README.md
-├── clusterware/
-│   ├── cluster-resource-troubleshooting.md
-│   ├── node-reachability-checks.md
-│   └── runcluvfy-precheck-troubleshooting.md
-├── rac-performance/
-│   ├── oracle-rac-awr-analysis.md
-│   ├── rac-wait-event-analysis.md
-│   └── sql-performance-investigation.md
-├── grid-infrastructure/
-│   └── installation-prerequisites.md
-└── scripts/
-    └── README.md
-```
+| Guide | Description |
+|---|---|
+| [CVU and runcluvfy Troubleshooting](grid-infrastructure/cvu-runcluvfy-troubleshooting.md) | Investigate Cluster Verification Utility failures and installation prerequisite issues. |
 
-Add files to these folders as the corresponding guides and scripts are
-published. Do not create placeholder files that imply content exists
-when it does not.
+## RAC Performance
 
-## How to Use This Repository
+Practical approaches to analyzing Oracle RAC performance and database wait events.
 
-1.  Find the guide related to the issue you are investigating.
-2.  Confirm that the commands and checks apply to your Oracle Database
-    and Grid Infrastructure versions.
-3.  Run diagnostic commands with the appropriate privileges.
-4.  Capture the output and compare it with the expected behavior
-    described in the guide.
-5.  Validate configuration changes in a non-production environment
-    whenever possible.
-6.  Document the result and any environment-specific differences.
+| Guide | Description |
+|---|---|
+| [Oracle RAC AWR Analysis](rac-performance/oracle-rac-awr-analysis.md) | Analyze AWR reports, DB Time, CPU, I/O, RAC waits, and SQL performance. |
+| [RAC Wait Event Analysis](rac-performance/rac-wait-event-analysis.md) | Investigate Global Cache waits, Cache Fusion, and RAC interconnect-related waits. |
+| [SQL Performance Investigation](rac-performance/sql-performance-investigation.md) | Investigate SQL execution statistics, execution plans, and performance regressions. |
 
-## Important Notes
+## Automation Scripts
 
--   Commands and examples are provided for learning and troubleshooting;
-    validate them before running in production.
--   Some commands require `root`, `grid`, or `oracle` privileges. Use
-    the least privilege required.
--   AWR and ADDM access may be subject to Oracle licensing and privilege
-    requirements. Confirm the applicable entitlements for your
-    environment.
--   Do not publish customer AWR reports, SQL text, SQL IDs, database or
-    schema names, hostnames, IP addresses, credentials, wallet contents,
-    or other confidential information.
--   Sanitize terminal output and screenshots before committing them to a
-    public repository.
--   Always review the impact and rollback plan before making production
-    changes.
+Shell scripts for routine Oracle RAC administration and monitoring.
 
-## Contributions
+| Script | Description |
+|---|---|
+| [Node Reboot Alert](scripts/node_reboot_alert.sh) | Detect a recent Linux node reboot and send an email notification. |
+| [RAC Health Snapshot](scripts/rac_health_snapshot.sh) | Collect a basic RAC, Clusterware, ASM, and operating-system health snapshot. |
 
-Suggestions, corrections, and additional troubleshooting notes are
-welcome. When contributing:
+Review each script before execution and adjust environment-specific settings.
 
--   Include the Oracle Database / Grid Infrastructure version where
-    relevant.
--   Explain the issue, diagnostic steps, and observed result.
--   Remove customer-specific and confidential information.
--   Clearly distinguish confirmed behavior from assumptions or
-    environment-specific observations.
+## Operational Checklists
+
+| Checklist | Description |
+|---|---|
+| [Pre-change and Post-change Checklist](checklists/pre-change-post-change.md) | A structured checklist for planning, validating, and documenting database infrastructure changes. |
+
+## Getting Started
+
+1. Browse the relevant troubleshooting guide or checklist.
+2. Review the prerequisites and commands before executing them.
+3. Replace example values with details from your own environment.
+4. Validate commands against your Oracle Database and Grid Infrastructure versions.
+5. Capture diagnostic output before and after changes.
+6. Document findings and follow your organization's change-management process.
+
+## Compatibility and Safety
+
+- The documentation primarily focuses on Oracle Database RAC and Grid Infrastructure administration.
+- Command availability and syntax may vary by Oracle Database release, Grid Infrastructure version, and operating system.
+- Linux shell scripts may require GNU utilities and appropriate operating-system permissions.
+- Some diagnostic features, including AWR, ADDM, ASH, and SQL Monitor, may require Oracle Diagnostics Pack or Tuning Pack licensing. Verify your organization's licensing before use.
+- Review scripts and commands before running them in production.
+- Avoid executing destructive commands without an approved change plan and recovery strategy.
+- Never publish production credentials, private IP details, customer information, or sensitive diagnostic output.
+
+## Contributing
+
+Contributions, corrections, and practical troubleshooting scenarios are welcome.
+
+When contributing:
+
+1. Use clear and descriptive file names.
+2. Include the Oracle Database and Grid Infrastructure versions where relevant.
+3. Provide reproducible steps and sanitized command output.
+4. Explain the root cause and resolution where known.
+5. Remove credentials, customer details, and other sensitive information.
+6. Verify commands before submitting changes.
+
+For issues or suggestions, open a GitHub Issue in this repository.
 
 ## Disclaimer
 
-This repository is an independent technical knowledge-sharing project.
-It is not an official Oracle publication and is not affiliated with or
-endorsed by Oracle.
+This repository is intended for educational and operational reference purposes. The examples are provided as-is and should be validated in a non-production environment before being used in production.
 
-------------------------------------------------------------------------
+Always follow Oracle documentation, applicable support guidance, organizational policies, and approved change procedures.
 
-**Maintainer:** Krishna Sai\
-**Focus:** Oracle Database \| RAC \| Grid Infrastructure \| Clusterware
-\| AWR \| Performance Troubleshooting
+## License
+
+See the [LICENSE](LICENSE) file for licensing information.
+
+---
+
+**Maintained as a practical Oracle DBA knowledge base.**
