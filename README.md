@@ -9,6 +9,7 @@ This repository contains DBA-focused troubleshooting guides, operational checkli
 
 - [Clusterware Troubleshooting](#clusterware-troubleshooting)
 - [Grid Infrastructure](#grid-infrastructure)
+- [Asm Diskgroup](#asm/asm-diskgroup-troubleshooting)
 - [RAC Performance](#rac-performance)
 - [Automation Scripts](#automation-scripts)
 - [Operational Checklists](#operational-checklists)
@@ -32,6 +33,14 @@ Guides for Grid Infrastructure verification and troubleshooting.
 | Guide | Description |
 |---|---|
 | [CVU and runcluvfy Troubleshooting](grid-infrastructure/cvu-runcluvfy-troubleshooting.md) | Investigate Cluster Verification Utility failures and installation prerequisite issues. |
+
+## ASM Storage Management
+
+Guides for Oracle Automatic Storage Management administration and troubleshooting.
+
+| Guide | Description |
+|---|---|
+| [ASM Disk Group Troubleshooting](asm/asm-diskgroup-troubleshooting.md) | Investigate ASM disk group health, capacity, disk status, redundancy, and rebalance operations. |
 
 ## RAC Performance
 
