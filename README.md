@@ -9,7 +9,7 @@ This repository contains DBA-focused troubleshooting guides, operational checkli
 
 - [Clusterware Troubleshooting](#clusterware-troubleshooting)
 - [Grid Infrastructure](#grid-infrastructure)
-- [Asm Diskgroup](#asm/asm-diskgroup-troubleshooting)
+- [ASM Storage Management](#asm-storage-management)
 - [RAC Performance](#rac-performance)
 - [Automation Scripts](#automation-scripts)
 - [Operational Checklists](#operational-checklists)
