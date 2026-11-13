@@ -1,118 +1,168 @@
+# Oracle RAC & Clusterware Troubleshooting Knowledge Base
 
-# Oracle RAC Administration & Troubleshooting Knowledge Base
+A practical knowledge base for Oracle Database Administrators working with Oracle RAC, Grid Infrastructure, ASM, Data Guard, RMAN, and Exadata environments.
 
-A practical knowledge base for Oracle Database Administrators covering Oracle Real Application Clusters (RAC), Grid Infrastructure, Clusterware, performance troubleshooting, health checks, and automation.
+This repository contains installation guides, troubleshooting procedures, performance analysis queries, health checks, operational scripts, and maintenance checklists.
 
-This repository contains DBA-focused troubleshooting guides, operational checklists, and shell scripts designed to help diagnose issues, perform routine health checks, and support Oracle RAC environments.
+## Repository Contents
 
-## Contents
+### 1. Clusterware Troubleshooting
 
-- [Clusterware Troubleshooting](#clusterware-troubleshooting)
-- [Grid Infrastructure](#grid-infrastructure)
-- [ASM Storage Management](#asm-storage-management)
-- [RAC Performance](#rac-performance)
-- [Automation Scripts](#automation-scripts)
-- [Operational Checklists](#operational-checklists)
-- [Getting Started](#getting-started)
-- [Compatibility and Safety](#compatibility-and-safety)
-- [Contributing](#contributing)
-
-## Clusterware Troubleshooting
-
-Guides for investigating Oracle Clusterware and RAC connectivity issues.
-
-| Guide | Description |
+| Document | Description |
 |---|---|
-| [Node Reachability Checks](clusterware/node-reachability-checks.md) | Troubleshoot hostname resolution, node connectivity, SSH, network interfaces, and routing. |
-| [OCR and Voting Disk Checks](clusterware/ocr-voting-disk-checks.md) | Check OCR health, OCR backups, voting disks, and related Clusterware issues. |
+| [Node Reachability Checks](clusterware/node-reachability-checks.md) | Troubleshooting node connectivity and name resolution |
+| [OCR and Voting Disk Checks](clusterware/ocr-voting-disk-checks.md) | OCR integrity, backup, and voting disk validation |
+| [Node Eviction Troubleshooting](clusterware/node-eviction-troubleshooting.md) | Investigating RAC node evictions and cluster reconfiguration |
+| [Private Interconnect Troubleshooting](clusterware/private-interconnect-troubleshooting.md) | Diagnosing RAC interconnect and network issues |
 
-## Grid Infrastructure
+### 2. Grid Infrastructure
 
-Guides for Grid Infrastructure verification and troubleshooting.
-
-| Guide | Description |
+| Document | Description |
 |---|---|
-| [CVU and runcluvfy Troubleshooting](grid-infrastructure/cvu-runcluvfy-troubleshooting.md) | Investigate Cluster Verification Utility failures and installation prerequisite issues. |
+| [CVU and runcluvfy Troubleshooting](grid-infrastructure/cvu-runcluvfy-troubleshooting.md) | Resolving Cluster Verification Utility failures |
+| [Grid Infrastructure Patching](grid-infrastructure/gi-patching-troubleshooting.md) | GI patching checks and troubleshooting procedures |
 
-## ASM Storage Management
+### 3. Oracle RAC Installation
 
-Guides for Oracle Automatic Storage Management administration and troubleshooting.
-
-| Guide | Description |
+| Document | Description |
 |---|---|
-| [ASM Disk Group Troubleshooting](asm/asm-diskgroup-troubleshooting.md) | Investigate ASM disk group health, capacity, disk status, redundancy, and rebalance operations. |
+| [Oracle RAC 19c Installation Guide](installation/rac-19c-installation-guide.md) | RAC 19c installation prerequisites and configuration guidance |
 
-## RAC Performance
+### 4. ASM Troubleshooting
 
-Practical approaches to analyzing Oracle RAC performance and database wait events.
-
-| Guide | Description |
+| Document | Description |
 |---|---|
-| [Oracle RAC AWR Analysis](rac-performance/oracle-rac-awr-analysis.md) | Analyze AWR reports, DB Time, CPU, I/O, RAC waits, and SQL performance. |
-| [RAC Wait Event Analysis](rac-performance/rac-wait-event-analysis.md) | Investigate Global Cache waits, Cache Fusion, and RAC interconnect-related waits. |
-| [SQL Performance Investigation](rac-performance/sql-performance-investigation.md) | Investigate SQL execution statistics, execution plans, and performance regressions. |
+| [ASM Disk Group Troubleshooting](asm/asm-diskgroup-troubleshooting.md) | Disk group health, capacity, and disk failure investigation |
+| [ASM Rebalance Analysis](asm/asm-rebalance-analysis.md) | Monitoring and analyzing ASM rebalance operations |
 
-## Automation Scripts
+### 5. RAC Performance Analysis
 
-Shell scripts for routine Oracle RAC administration and monitoring.
+| Document | Description |
+|---|---|
+| [Oracle RAC AWR Analysis](rac-performance/oracle-rac-awr-analysis.md) | AWR analysis and instance-level performance investigation |
+| [RAC Wait Event Analysis](rac-performance/rac-wait-event-analysis.md) | Historical and real-time wait-event analysis |
+| [SQL Performance Investigation](rac-performance/sql-performance-investigation.md) | SQL execution plans and performance troubleshooting |
+
+### 6. Oracle Data Guard
+
+| Document | Description |
+|---|---|
+| [Oracle Data Guard Troubleshooting](dataguard/oracle-dataguard-troubleshooting.md) | Data Guard configuration, synchronization, and troubleshooting |
+
+### 7. RMAN Backup and Recovery
+
+| Document | Description |
+|---|---|
+| [Oracle RMAN Backup and Recovery Guide](rman/oracle-rman-backup-recovery-guide.md) | Backup validation, restore, recovery, and RMAN troubleshooting |
+
+### 8. Oracle Exadata and ExaCS
+
+| Document | Description |
+|---|---|
+| [Oracle Exadata and ExaCS Health Checks](exadata/oracle-exadata-exacs-health-checks.md) | Exadata storage, cell, database, and infrastructure health checks |
+
+### 9. Automation Scripts
 
 | Script | Description |
 |---|---|
-| [Node Reboot Alert](scripts/node_reboot_alert.sh) | Detect a recent Linux node reboot and send an email notification. |
-| [RAC Health Snapshot](scripts/rac_health_snapshot.sh) | Collect a basic RAC, Clusterware, ASM, and operating-system health snapshot. |
+| [Node Reboot Alert](scripts/node_reboot_alert.sh) | Detects node reboots and sends email notifications |
+| [RAC Health Snapshot](scripts/rac_health_snapshot.sh) | Captures RAC environment health information |
 
-Review each script before execution and adjust environment-specific settings.
-
-## Operational Checklists
+### 10. Operational Checklists
 
 | Checklist | Description |
 |---|---|
-| [Pre-change and Post-change Checklist](checklists/pre-change-post-change.md) | A structured checklist for planning, validating, and documenting database infrastructure changes. |
-
-## Getting Started
-
-1. Browse the relevant troubleshooting guide or checklist.
-2. Review the prerequisites and commands before executing them.
-3. Replace example values with details from your own environment.
-4. Validate commands against your Oracle Database and Grid Infrastructure versions.
-5. Capture diagnostic output before and after changes.
-6. Document findings and follow your organization's change-management process.
-
-## Compatibility and Safety
-
-- The documentation primarily focuses on Oracle Database RAC and Grid Infrastructure administration.
-- Command availability and syntax may vary by Oracle Database release, Grid Infrastructure version, and operating system.
-- Linux shell scripts may require GNU utilities and appropriate operating-system permissions.
-- Some diagnostic features, including AWR, ADDM, ASH, and SQL Monitor, may require Oracle Diagnostics Pack or Tuning Pack licensing. Verify your organization's licensing before use.
-- Review scripts and commands before running them in production.
-- Avoid executing destructive commands without an approved change plan and recovery strategy.
-- Never publish production credentials, private IP details, customer information, or sensitive diagnostic output.
-
-## Contributing
-
-Contributions, corrections, and practical troubleshooting scenarios are welcome.
-
-When contributing:
-
-1. Use clear and descriptive file names.
-2. Include the Oracle Database and Grid Infrastructure versions where relevant.
-3. Provide reproducible steps and sanitized command output.
-4. Explain the root cause and resolution where known.
-5. Remove credentials, customer details, and other sensitive information.
-6. Verify commands before submitting changes.
-
-For issues or suggestions, open a GitHub Issue in this repository.
-
-## Disclaimer
-
-This repository is intended for educational and operational reference purposes. The examples are provided as-is and should be validated in a non-production environment before being used in production.
-
-Always follow Oracle documentation, applicable support guidance, organizational policies, and approved change procedures.
-
-## License
-
-See the [LICENSE](LICENSE) file for licensing information.
+| [Pre-Change and Post-Change Checklist](checklists/pre-change-post-change.md) | Standard operational validation before and after maintenance |
 
 ---
 
-**Maintained as a practical Oracle DBA knowledge base.**
+## Repository Structure
+
+```text
+oracle-rac-clusterware-troubleshooting/
+│
+├── README.md
+├── LICENSE
+│
+├── clusterware/
+│   ├── node-reachability-checks.md
+│   ├── ocr-voting-disk-checks.md
+│   ├── node-eviction-troubleshooting.md
+│   └── private-interconnect-troubleshooting.md
+│
+├── grid-infrastructure/
+│   ├── cvu-runcluvfy-troubleshooting.md
+│   └── gi-patching-troubleshooting.md
+│
+├── installation/
+│   └── rac-19c-installation-guide.md
+│
+├── asm/
+│   ├── asm-diskgroup-troubleshooting.md
+│   └── asm-rebalance-analysis.md
+│
+├── rac-performance/
+│   ├── oracle-rac-awr-analysis.md
+│   ├── rac-wait-event-analysis.md
+│   └── sql-performance-investigation.md
+│
+├── dataguard/
+│   └── oracle-dataguard-troubleshooting.md
+│
+├── rman/
+│   └── oracle-rman-backup-recovery-guide.md
+│
+├── exadata/
+│   └── oracle-exadata-exacs-health-checks.md
+│
+├── scripts/
+│   ├── node_reboot_alert.sh
+│   └── rac_health_snapshot.sh
+│
+└── checklists/
+    └── pre-change-post-change.md
+```
+
+---
+
+## Technologies Covered
+
+- Oracle Database 19c
+- Oracle Real Application Clusters (RAC)
+- Oracle Grid Infrastructure
+- Automatic Storage Management (ASM)
+- Oracle Clusterware
+- Oracle Data Guard
+- Oracle RMAN
+- Oracle Exadata
+- Oracle Exadata Cloud Service (ExaCS)
+- Linux administration and shell scripting
+
+## Purpose
+
+The objective of this repository is to maintain practical Oracle DBA documentation that can help with:
+
+- Day-to-day Oracle RAC administration.
+- Troubleshooting production database issues.
+- Grid Infrastructure installation and patching.
+- ASM storage management.
+- Database performance analysis.
+- Backup and recovery operations.
+- Exadata and ExaCS health monitoring.
+- Pre-change and post-change validation.
+
+## Disclaimer
+
+These documents are intended for technical reference and educational purposes.
+
+Always validate commands in a non-production environment before executing them in production. Follow the applicable Oracle documentation, support recommendations, licensing requirements, and approved change procedures.
+
+## Contributions
+
+Suggestions, corrections, and improvements are welcome.
+
+If you find an issue or have additional Oracle RAC troubleshooting scenarios, feel free to contribute.
+
+---
+
+**Maintained by:** Oracle Database Administration Community
