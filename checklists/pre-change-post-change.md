@@ -334,15 +334,12 @@ For infrastructure scaling:
 Commands:
 
 ```sql
-SELECT
-    inst_id,
-    instance_name,
-    status,
-    database_status
-FROM
-    gv$instance
-ORDER BY
-    inst_id;
+SELECT inst_id,
+       name,
+       open_mode,
+       database_role
+FROM gv$database
+ORDER BY inst_id;
 ```
 
 ```sql
