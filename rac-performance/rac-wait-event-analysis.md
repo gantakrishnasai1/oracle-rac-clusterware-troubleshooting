@@ -188,59 +188,36 @@ The following query calculates approximate event
 deltas between consecutive snapshots.
 
 ```sql
-WITH event_history AS
-(
+WITH wait_delta AS (
     SELECT
-        snap_id,
+        dbid,
         instance_number,
+        startup_time,
+        snap_id,
         event_name,
-        wait_class,
         total_waits,
-        time_waited_micro,
-        LAG(total_waits) OVER
-        (
+        LAG(total_waits) OVER (
             PARTITION BY
+                dbid,
                 instance_number,
+                startup_time,
                 event_name
             ORDER BY snap_id
-        ) AS previous_waits,
-        LAG(time_waited_micro) OVER
-        (
-            PARTITION BY
-                instance_number,
-                event_name
-            ORDER BY snap_id
-        ) AS previous_time
-    FROM
-        dba_hist_system_event
-    WHERE
-        snap_id BETWEEN :begin_snap - 1
-                    AND :end_snap
+        ) AS previous_waits
+    FROM dba_hist_system_event
 )
 SELECT
     instance_number,
     event_name,
-    wait_class,
-    SUM(total_waits - previous_waits)
-        AS waits_delta,
-    ROUND(
-        SUM(time_waited_micro - previous_time) / 1000000,
-        2
-    ) AS wait_seconds
-FROM
-    event_history
-WHERE
-    snap_id BETWEEN :begin_snap AND :end_snap
-    AND previous_waits IS NOT NULL
-    AND previous_time IS NOT NULL
-    AND total_waits >= previous_waits
-    AND time_waited_micro >= previous_time
+    SUM(total_waits - previous_waits) AS total_waits_delta
+FROM wait_delta
+WHERE previous_waits IS NOT NULL
+  AND total_waits >= previous_waits
 GROUP BY
     instance_number,
-    event_name,
-    wait_class
+    event_name
 ORDER BY
-    wait_seconds DESC;
+    total_waits_delta DESC;
 ```
 
 Important:
