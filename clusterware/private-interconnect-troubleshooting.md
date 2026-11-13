@@ -74,7 +74,6 @@ Check the RAC interconnect-related initialization parameters:
 
 ```sql
 SHOW PARAMETER cluster_interconnects;
-SHOW PARAMETER cluster_interconnects;
 ```
 
 Review the configured private interface and compare it with the actual network configuration.
