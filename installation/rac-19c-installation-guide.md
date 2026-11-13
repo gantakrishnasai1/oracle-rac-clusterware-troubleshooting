@@ -219,15 +219,11 @@ chown -R grid:oinstall /u01/app/grid
 chown -R oracle:oinstall /u01/app/oracle
 ```
 
-Set directory permissions according to the installation plan.
+Set directory ownership and permissions according to the Oracle installation plan.
 
-Example:
+**Important:** Do not apply recursive permissions such as `chmod -R 775` to the entire `/u01/app` directory. This may change permissions on Oracle software, Grid Infrastructure files, and other directories unexpectedly.
 
-```bash
-chmod -R 775 /u01/app
-```
-
-Validate ownership before running the installers.
+Validate the required ownership and permissions before running the installers.
 
 ---
 
