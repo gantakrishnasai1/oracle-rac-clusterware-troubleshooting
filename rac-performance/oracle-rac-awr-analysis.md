@@ -229,18 +229,41 @@ Check:
 Example SQL:
 
 ```sql
+WITH metric_delta AS (
+    SELECT
+        dbid,
+        instance_number,
+        startup_time,
+        snap_id,
+        stat_name,
+        value,
+        LAG(value) OVER (
+            PARTITION BY
+                dbid,
+                instance_number,
+                startup_time,
+                stat_name
+            ORDER BY snap_id
+        ) AS previous_value
+    FROM dba_hist_sys_time_model
+    WHERE stat_name IN (
+        'DB time',
+        'DB CPU'
+    )
+)
 SELECT
     instance_number,
-    SUM(value) / 1000000 AS db_time_seconds
-FROM
-    dba_hist_sys_time_model
-WHERE
-    snap_id BETWEEN :begin_snap AND :end_snap
-    AND stat_name = 'DB time'
+    stat_name,
+    SUM(value - previous_value) AS total_delta
+FROM metric_delta
+WHERE previous_value IS NOT NULL
+  AND value >= previous_value
 GROUP BY
-    instance_number
+    instance_number,
+    stat_name
 ORDER BY
-    instance_number;
+    instance_number,
+    stat_name;
 ```
 
 This query aggregates the sampled time-model values
